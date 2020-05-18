@@ -13,10 +13,10 @@ class Player
         void draw(sf::RenderWindow& window);
         void onCollision(sf::Vector2f direction, float deltatime);
         void settingTheVelocity(float deltatime, bool isCollision);
+        void onCollisionWithCoin();
         sf::Vector2f GetPosition() {return body.getPosition();}
         virtual ~Player();
 
-    protected:
 
     private:
         float speed;
@@ -28,6 +28,7 @@ class Player
         sf::Vector2f velocity;
         bool canJump;
         float jumpHeight;
+        int score=0;
 };
 
 #endif // PLAYER_H

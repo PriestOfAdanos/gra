@@ -27,7 +27,7 @@ void Animation::Update(int row, float deltaTime, bool faceRight)
     //std::cout<<uvRect.left<<'\n';
     uvRect.top = currentImage.y * uvRect.height;
 
-    if(!faceRight)
+    if(faceRight)
     {
         uvRect.width = abs(uvRect.width);
         uvRect.left = currentImage.x * uvRect.width;

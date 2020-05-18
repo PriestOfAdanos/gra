@@ -1,15 +1,15 @@
 # depslib dependency file v1.0
-1589200170 source:d:\cppexcercises\game-2d\src\player.cpp
+1589823620 source:d:\cppexcercises\game-2d\src\player.cpp
 	<iostream>
 	"Player.h"
 	<SFML\Graphics.hpp>
 
-1589200201 d:\cppexcercises\game-2d\include\player.h
+1589823641 d:\cppexcercises\game-2d\include\player.h
 	"Animation.h"
 	"Collider.h"
 	<SFML\Graphics.hpp>
 
-1589454236 source:d:\cppexcercises\game-2d\src\animation.cpp
+1589816563 source:d:\cppexcercises\game-2d\src\animation.cpp
 	"Animation.h"
 	<iostream>
 
@@ -425,11 +425,13 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1589454140 source:d:\cppexcercises\game-2d\main.cpp
+1589823615 source:d:\cppexcercises\game-2d\main.cpp
 	<SFML/Graphics.hpp>
 	<iostream>
+	<vector>
 	"Player.h"
 	"Platform.h"
+	"Collecatable.h"
 	"Animation.h"
 	"Collider.h"
 
@@ -446,4 +448,12 @@
 
 1589154198 d:\cppexcercises\game-2d\include\collider.h
 	<SFML\Graphics.hpp>
+
+1589822957 source:d:\cppexcercises\game-2d\src\collecatable.cpp
+	"Collecatable.h"
+	<SFML\Graphics.hpp>
+
+1589822777 d:\cppexcercises\game-2d\include\collecatable.h
+	<SFML\Graphics.hpp>
+	"Collider.h"
 
