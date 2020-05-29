@@ -9,6 +9,8 @@ class Animation
     public:
         Animation(sf::Texture* texture, sf::Vector2u imageCount, float switchTime);
         void Update(int row, float deltaTime, bool faceRight);
+        void UpdateItem(float deltaTime);
+        void updateEnemy(int row,bool faceRight ,float deltatime);
         virtual ~Animation();
 
     protected:

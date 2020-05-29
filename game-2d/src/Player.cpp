@@ -28,7 +28,7 @@ void Player::update(float deltatime){
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)&&canJump)
         {
             canJump = false;
-            velocity.y = -sqrtf(2.0f * 981.0f * jumpHeight);
+            velocity.y = -sqrtf(2.0f * 600.0f * jumpHeight);
         }
 
 
@@ -74,6 +74,12 @@ void Player::onCollision(sf::Vector2f direction, float deltatime)
 }
 void Player::onCollisionWithCoin(){
     score+=1;
+}
+void Player::onCollisionWithEnemy(){
+    body.setPosition(206.0f,206.0f);
+    velocity.y=0;
+    velocity.x=0;
+    canJump=false;
 }
 void Player::settingTheVelocity(float deltatime, bool isCollision){
     if(isCollision)

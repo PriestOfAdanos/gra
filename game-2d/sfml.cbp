@@ -49,11 +49,13 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/Animation.h" />
+		<Unit filename="include/Collecatable.h" />
 		<Unit filename="include/Collider.h" />
 		<Unit filename="include/Platform.h" />
 		<Unit filename="include/Player.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Animation.cpp" />
+		<Unit filename="src/Collecatable.cpp" />
 		<Unit filename="src/Collider.cpp" />
 		<Unit filename="src/Platform.cpp" />
 		<Unit filename="src/Player.cpp" />

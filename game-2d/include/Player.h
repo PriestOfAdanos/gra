@@ -10,6 +10,7 @@ class Player
         Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float jumpHeight);
         Collider GetCollider(){return Collider(body);}
         void update(float deltatime);
+        void onCollisionWithEnemy();
         void draw(sf::RenderWindow& window);
         void onCollision(sf::Vector2f direction, float deltatime);
         void settingTheVelocity(float deltatime, bool isCollision);

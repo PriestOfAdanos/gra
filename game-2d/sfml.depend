@@ -1,19 +1,19 @@
 # depslib dependency file v1.0
-1589823620 source:d:\cppexcercises\game-2d\src\player.cpp
+1590753290 source:d:\cppexcercises\game-2d\src\player.cpp
 	<iostream>
 	"Player.h"
 	<SFML\Graphics.hpp>
 
-1589823641 d:\cppexcercises\game-2d\include\player.h
+1590752468 d:\cppexcercises\game-2d\include\player.h
 	"Animation.h"
 	"Collider.h"
 	<SFML\Graphics.hpp>
 
-1589816563 source:d:\cppexcercises\game-2d\src\animation.cpp
+1590746615 source:d:\cppexcercises\game-2d\src\animation.cpp
 	"Animation.h"
 	<iostream>
 
-1588780982 d:\cppexcercises\game-2d\include\animation.h
+1590745776 d:\cppexcercises\game-2d\include\animation.h
 	<SFML\Graphics.hpp>
 
 1587576626 d:\cppexcercises\game-2d\include\sfml\graphics.hpp
@@ -425,7 +425,7 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1589823615 source:d:\cppexcercises\game-2d\main.cpp
+1590753592 source:d:\cppexcercises\game-2d\main.cpp
 	<SFML/Graphics.hpp>
 	<iostream>
 	<vector>
@@ -434,6 +434,7 @@
 	"Collecatable.h"
 	"Animation.h"
 	"Collider.h"
+	"Enemy.h"
 
 1588547157 source:d:\cppexcercises\game-2d\src\platform.cpp
 	"Platform.h"
@@ -449,11 +450,21 @@
 1589154198 d:\cppexcercises\game-2d\include\collider.h
 	<SFML\Graphics.hpp>
 
-1589822957 source:d:\cppexcercises\game-2d\src\collecatable.cpp
+1589838994 source:d:\cppexcercises\game-2d\src\collecatable.cpp
 	"Collecatable.h"
 	<SFML\Graphics.hpp>
 
-1589822777 d:\cppexcercises\game-2d\include\collecatable.h
+1589837541 d:\cppexcercises\game-2d\include\collecatable.h
 	<SFML\Graphics.hpp>
 	"Collider.h"
+	"Animation.h"
+
+1590752262 d:\cppexcercises\game-2d\include\enemy.h
+	"Animation.h"
+	"Collider.h"
+
+1590751614 source:d:\cppexcercises\game-2d\src\enemy.cpp
+	"Enemy.h"
+	<iostream>
+	<SFML\Graphics.hpp>
 

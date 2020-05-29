@@ -6,6 +6,8 @@
 #include "Collecatable.h"
 #include "Animation.h"
 #include "Collider.h"
+#include "Enemy.h"
+
 static const float VIEW_WIDTH = 1280.0f;
 static const float  VIEW_HEIGHT  = 720.0f;
 
@@ -24,22 +26,26 @@ int main()
     //player.setPosition(206.0f,206.0f);
     sf::Texture playerTexture;
     sf::Texture platformTexture;
+    sf::Texture coinTexture;
+    sf::Texture enemyTexture;
+    enemyTexture.loadFromFile("graphics/dragon.png");
     playerTexture.loadFromFile("graphics/tux_from_linux.png");
+    coinTexture.loadFromFile("graphics/coins.png");
     platformTexture.loadFromFile("graphics/Ground&Stone/Ground/Ground0.png");
-    Collecatable bottle(nullptr, sf::Vector2f(40.0f,60.0f),sf::Vector2f(264.0f,480.0f));
-    std::vector<Platform> platforms;
+    Collecatable bottle(&coinTexture, sf::Vector2u(1,4),0.3f,sf::Vector2f(30.0f,30.0f),sf::Vector2f(264.0f,435.0f));
 
+    std::vector<Platform> platforms;
     platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(200.0f,500.0f)));
     platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(264.0f,500.0f)));
     platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(328.0f,500.0f)));
     platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(392.0f,500.0f)));
 
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(50.0f,50.0f), sf::Vector2f(650.0f,300.0f)));
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(128.0f,128.0f), sf::Vector2f(950.0f,150.0f)));
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(128.0f,128.0f), sf::Vector2f(1150.0f,50.0f)));
+    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+1*64.0f,390.0f)));
+    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+2*64.0f,390.0f)));
+    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+3*64.0f,390.0f)));
+    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+4*64.0f,390.0f)));
 
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(128.0f,128.0f), sf::Vector2f(1000.0f,0.0f)));
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(128.0f,128.0f), sf::Vector2f(1350.0f,-50.0f)));
+
 
 
 //    Platform platforms[3];
@@ -49,13 +55,14 @@ int main()
   //      platforms[i]= Platform platform (&platformTexture, sf::Vector2f(128.0f,128.0f), sf::Vector2f(950.0f,150.0f));
  //   }
    // player.setTexture(&playerTexture);
+    Enemy dragon(&enemyTexture, sf::Vector2u(3,4),0.3f,300.0f);
     Player player(&playerTexture, sf::Vector2u(3,9),0.3f,300.0f,200.0f);
     float deltatime = 0.0f;
     sf::Clock clock;
     while (window.isOpen())
     {
         deltatime = clock.restart().asSeconds();
-        sf::sleep(sf::milliseconds(9));
+        sf::sleep(sf::milliseconds(11));
         sf::Event event;
         while(window.pollEvent(event))
         {
@@ -67,6 +74,8 @@ int main()
         }
 
         player.update(deltatime);
+        bottle.update(deltatime);
+        dragon.update(deltatime);
         Collider playerCollision = player.GetCollider();
         sf::Vector2f direction;
         for(Platform& platform : platforms)
@@ -84,6 +93,11 @@ int main()
         window.setView(view);
         player.draw(window);
         bottle.draw(window);
+        dragon.draw(window);
+        if(dragon.GetCollider().checkCollioson(playerCollision,direction,1.0f))
+        {
+            player.onCollisionWithEnemy();
+        }
         if(bottle.GetCollider().checkCollioson(playerCollision,direction,1.0f))
         {
             player.onCollisionWithCoin();
