@@ -6,6 +6,7 @@ Enemy::Enemy(sf::Texture* texture, sf::Vector2u imageCount,  float switchTime, f
     animation(texture, imageCount, switchTime)
 {
     this->speed = speed;
+    totalDistance=0;
     row=2;
     leftDirectionForward = true;
     faceRight=false;

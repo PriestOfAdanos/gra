@@ -81,15 +81,7 @@ void Player::onCollisionWithEnemy(){
     velocity.x=0;
     canJump=false;
 }
-void Player::settingTheVelocity(float deltatime, bool isCollision){
-    if(isCollision)
-    {
-        velocity.y=0.0f;
-        canJump=true;
-    } else {
-        velocity.y += 981*deltatime;
-    }
-}
+
 Player::~Player()
 {
     //dtor

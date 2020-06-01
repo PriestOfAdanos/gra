@@ -13,9 +13,9 @@ class Platform
         virtual ~Platform();
 
     protected:
-
-    private:
         sf::RectangleShape block;
+    private:
+
 };
 
 #endif // PLATFORM_H

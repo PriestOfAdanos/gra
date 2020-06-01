@@ -13,7 +13,6 @@ class Player
         void onCollisionWithEnemy();
         void draw(sf::RenderWindow& window);
         void onCollision(sf::Vector2f direction, float deltatime);
-        void settingTheVelocity(float deltatime, bool isCollision);
         void onCollisionWithCoin();
         sf::Vector2f GetPosition() {return body.getPosition();}
         virtual ~Player();

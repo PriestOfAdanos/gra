@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 #include <vector>
 #include "Player.h"
@@ -7,6 +8,7 @@
 #include "Animation.h"
 #include "Collider.h"
 #include "Enemy.h"
+#include "Box.h"
 
 static const float VIEW_WIDTH = 1280.0f;
 static const float  VIEW_HEIGHT  = 720.0f;
@@ -28,12 +30,22 @@ int main()
     sf::Texture platformTexture;
     sf::Texture coinTexture;
     sf::Texture enemyTexture;
+    sf::Texture boxTexture;
+    sf::SoundBuffer BufferCoin;
+    BufferCoin.loadFromFile("Audio/Coin.wav");
+    sf::Sound CoinSound;
+    CoinSound.setBuffer(BufferCoin);
     enemyTexture.loadFromFile("graphics/dragon.png");
-    playerTexture.loadFromFile("graphics/tux_from_linux.png");
+    playerTexture.loadFromFile("graphics/wilber_from_gimp.png");
     coinTexture.loadFromFile("graphics/coins.png");
+    boxTexture.loadFromFile("graphics/box.png");
     platformTexture.loadFromFile("graphics/Ground&Stone/Ground/Ground0.png");
-    Collecatable bottle(&coinTexture, sf::Vector2u(1,4),0.3f,sf::Vector2f(30.0f,30.0f),sf::Vector2f(264.0f,435.0f));
+    std::vector<Collecatable> Coins;
+    Coins.push_back(Collecatable(&coinTexture, sf::Vector2u(1,4),0.3f,sf::Vector2f(30.0f,30.0f),sf::Vector2f(264.0f+0*70.0f,435.0f)));
+    Coins.push_back(Collecatable(&coinTexture, sf::Vector2u(1,4),0.3f,sf::Vector2f(30.0f,30.0f),sf::Vector2f(264.0f+1*70.0f,435.0f)));
+    Coins.push_back(Collecatable(&coinTexture, sf::Vector2u(1,4),0.3f,sf::Vector2f(30.0f,30.0f),sf::Vector2f(264.0f+2*70.0f,435.0f)));
 
+    Box box(&boxTexture, sf::Vector2f(60.0f,60.0f), sf::Vector2f(264.0f,400.0f));
     std::vector<Platform> platforms;
     platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(200.0f,500.0f)));
     platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(264.0f,500.0f)));
@@ -45,16 +57,12 @@ int main()
     platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+3*64.0f,390.0f)));
     platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+4*64.0f,390.0f)));
 
+    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+1*64.0f,280.0f)));
+    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+2*64.0f,280.0f)));
+    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+3*64.0f,280.0f)));
+    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+4*64.0f,280.0f)));
 
 
-
-//    Platform platforms[3];
-  //  int i = 0;
-  //  while(i<3)
- //   {
-  //      platforms[i]= Platform platform (&platformTexture, sf::Vector2f(128.0f,128.0f), sf::Vector2f(950.0f,150.0f));
- //   }
-   // player.setTexture(&playerTexture);
     Enemy dragon(&enemyTexture, sf::Vector2u(3,4),0.3f,300.0f);
     Player player(&playerTexture, sf::Vector2u(3,9),0.3f,300.0f,200.0f);
     float deltatime = 0.0f;
@@ -70,21 +78,38 @@ int main()
                 window.close();
             if (event.type == sf::Event::Resized)
                 ResizeView(window,view);
-
         }
 
         player.update(deltatime);
-        bottle.update(deltatime);
         dragon.update(deltatime);
+        box.update(deltatime);
         Collider playerCollision = player.GetCollider();
-        sf::Vector2f direction;
+        Collider boxColision = box.GetCollider();
+        sf::Vector2f directionBox;
+        sf::Vector2f directionPlayer;
+        if(box.GetCollider().checkCollioson(playerCollision,directionPlayer,0.5f))
+                player.onCollision(directionPlayer,deltatime);
+
         for(Platform& platform : platforms)
         {
-            if(platform.GetCollider().checkCollioson(playerCollision,direction,1.0f))
-                player.onCollision(direction,deltatime);
+            if(platform.GetCollider().checkCollioson(playerCollision,directionPlayer,1.0f))
+                player.onCollision(directionPlayer,deltatime);
+            if(platform.GetCollider().checkCollioson(boxColision,directionBox,1.0f))
+                box.onCollision(directionBox,deltatime);
+        }
+        for(Collecatable& coin: Coins)
+        {
+            coin.update(deltatime);
+            if(coin.GetCollider().checkCollioson(playerCollision,directionPlayer,0))
+            {
+                CoinSound.play();
+                player.onCollisionWithCoin();
+                coin.removeElement();
+            }
         }
 
-        player.onCollision(direction,deltatime);
+        box.onCollision(directionBox,deltatime);
+        player.onCollision(directionPlayer,deltatime);
         view.setCenter(player.GetPosition());
 
         //player.setTextureRect(animation.uvRect);
@@ -92,20 +117,20 @@ int main()
         window.clear(sf::Color(0,245,255));
         window.setView(view);
         player.draw(window);
-        bottle.draw(window);
+        box.draw(window);
         dragon.draw(window);
-        if(dragon.GetCollider().checkCollioson(playerCollision,direction,1.0f))
+        if(dragon.GetCollider().checkCollioson(playerCollision,directionPlayer,1.0f))
         {
             player.onCollisionWithEnemy();
         }
-        if(bottle.GetCollider().checkCollioson(playerCollision,direction,1.0f))
-        {
-            player.onCollisionWithCoin();
-            bottle.removeElement();
-        }
+
         for(Platform& platform : platforms)
         {
             platform.draw(window);
+        }
+        for(Collecatable& coin : Coins)
+        {
+            coin.draw(window);
         }
         window.display();
     }
