@@ -9,6 +9,7 @@
 #include "Collider.h"
 #include "Enemy.h"
 #include "Box.h"
+#include "Tekst.h"
 
 static const float VIEW_WIDTH = 1280.0f;
 static const float  VIEW_HEIGHT  = 720.0f;
@@ -32,10 +33,18 @@ int main()
     sf::Texture enemyTexture;
     sf::Texture boxTexture;
     sf::SoundBuffer BufferCoin;
+    sf::Font font;
+    if (!font.loadFromFile("Fonts/Boxy-Bold.ttf"))
+    {
+        std::cout<<"error during font loading";
+    } else {
+        std::cout<<"good";
+    }
+    Tekst tekst(&font,"chuj",48,sf::Color::Black, sf::Vector2f(50.0f,50.0f));
     BufferCoin.loadFromFile("Audio/Coin.wav");
     sf::Sound CoinSound;
     CoinSound.setBuffer(BufferCoin);
-    enemyTexture.loadFromFile("graphics/dragon.png");
+    enemyTexture.loadFromFile("graphics/dragon-2.png");
     playerTexture.loadFromFile("graphics/wilber_from_gimp.png");
     coinTexture.loadFromFile("graphics/coins.png");
     boxTexture.loadFromFile("graphics/box.png");
@@ -49,22 +58,27 @@ int main()
     std::vector<Platform> platforms;
     platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(200.0f,500.0f)));
     platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(264.0f,500.0f)));
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(328.0f,500.0f)));
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(392.0f,500.0f)));
 
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+1*64.0f,390.0f)));
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+2*64.0f,390.0f)));
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+3*64.0f,390.0f)));
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+4*64.0f,390.0f)));
 
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+1*64.0f,280.0f)));
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+2*64.0f,280.0f)));
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+3*64.0f,280.0f)));
+    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+1*64.0f,500.0f)));
+    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+2*64.0f,500.0f)));
+    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+3*64.0f,500.0f)));
+
+    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+8*64.0f,500.0f)));
+    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+9*64.0f,500.0f)));
+
+
     platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+4*64.0f,280.0f)));
 
+    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+5*64.0f,775.0f)));
+    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+6*64.0f,775.0f)));
+    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+7*64.0f,775.0f)));
+    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+8*64.0f,775.0f)));
+    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+9*64.0f,775.0f)));
+    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+10*64.0f,775.0f)));
 
-    Enemy dragon(&enemyTexture, sf::Vector2u(3,4),0.3f,300.0f);
-    Player player(&playerTexture, sf::Vector2u(3,9),0.3f,300.0f,200.0f);
+    Enemy dragon(&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f);
+    Player player(&playerTexture, sf::Vector2u(3,9),0.3f,300.0f,200.0f,0,1);
     float deltatime = 0.0f;
     sf::Clock clock;
     while (window.isOpen())
@@ -83,6 +97,7 @@ int main()
         player.update(deltatime);
         dragon.update(deltatime);
         box.update(deltatime);
+        tekst.updateText(player.lives,player.score,player.GetPosition());
         Collider playerCollision = player.GetCollider();
         Collider boxColision = box.GetCollider();
         sf::Vector2f directionBox;
@@ -119,6 +134,7 @@ int main()
         player.draw(window);
         box.draw(window);
         dragon.draw(window);
+        tekst.draw(window);
         if(dragon.GetCollider().checkCollioson(playerCollision,directionPlayer,1.0f))
         {
             player.onCollisionWithEnemy();
@@ -131,6 +147,11 @@ int main()
         for(Collecatable& coin : Coins)
         {
             coin.draw(window);
+        }
+        if(player.lives<1)
+        {
+            Tekst gameOver(&font,"Game\nOver",96,sf::Color::Black, sf::Vector2f(50.0f,100.0f));
+            gameOver.draw(window);
         }
         window.display();
     }

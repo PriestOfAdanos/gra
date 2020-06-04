@@ -2,8 +2,8 @@
 #include "Player.h"
 #include <SFML\Graphics.hpp>
 
-Player::Player(sf::Texture* texture, sf::Vector2u imageCount,  float switchTime, float speed, float jumpHeight):
-    animation(texture, imageCount, switchTime)
+Player::Player(sf::Texture* texture, sf::Vector2u imageCount,  float switchTime, float speed, float jumpHeight,int score, int lives):
+    animation(texture, imageCount, switchTime),lives(lives),score(score)
 {
     this->jumpHeight=jumpHeight;
     this->speed = speed;
@@ -43,6 +43,7 @@ void Player::update(float deltatime){
             else
                 faceRight= false;
             }
+
             animation.Update(row,deltatime,faceRight);
             body.setTextureRect(animation.uvRect);
             body.move(velocity*deltatime);
@@ -70,12 +71,14 @@ void Player::onCollision(sf::Vector2f direction, float deltatime)
         velocity.y=0.0f;
     } else {
         velocity.y += 981*deltatime;
+        canJump=false;
     }
 }
 void Player::onCollisionWithCoin(){
     score+=1;
 }
 void Player::onCollisionWithEnemy(){
+    lives-=1;
     body.setPosition(206.0f,206.0f);
     velocity.y=0;
     velocity.x=0;

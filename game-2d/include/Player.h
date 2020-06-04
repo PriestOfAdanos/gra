@@ -7,7 +7,7 @@
 class Player
 {
     public:
-        Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float jumpHeight);
+        Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float jumpHeight,int score, int lives);
         Collider GetCollider(){return Collider(body);}
         void update(float deltatime);
         void onCollisionWithEnemy();
@@ -28,7 +28,8 @@ class Player
         sf::Vector2f velocity;
         bool canJump;
         float jumpHeight;
-        int score=0;
+        int score;
+        int lives;
 };
 
 #endif // PLAYER_H

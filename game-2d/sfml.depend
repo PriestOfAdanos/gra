@@ -1,10 +1,10 @@
 # depslib dependency file v1.0
-1591004514 source:d:\cppexcercises\game-2d\src\player.cpp
+1591306956 source:d:\cppexcercises\game-2d\src\player.cpp
 	<iostream>
 	"Player.h"
 	<SFML\Graphics.hpp>
 
-1591004406 d:\cppexcercises\game-2d\include\player.h
+1591286113 d:\cppexcercises\game-2d\include\player.h
 	"Animation.h"
 	"Collider.h"
 	<SFML\Graphics.hpp>
@@ -425,7 +425,7 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1591005783 source:d:\cppexcercises\game-2d\main.cpp
+1591307399 source:d:\cppexcercises\game-2d\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<iostream>
@@ -437,6 +437,7 @@
 	"Collider.h"
 	"Enemy.h"
 	"Box.h"
+	"Tekst.h"
 
 1588547157 source:d:\cppexcercises\game-2d\src\platform.cpp
 	"Platform.h"
@@ -465,7 +466,7 @@
 	"Animation.h"
 	"Collider.h"
 
-1590754705 source:d:\cppexcercises\game-2d\src\enemy.cpp
+1591284144 source:d:\cppexcercises\game-2d\src\enemy.cpp
 	"Enemy.h"
 	<iostream>
 	<SFML\Graphics.hpp>
@@ -581,5 +582,13 @@
 1591004757 source:d:\cppexcercises\game-2d\src\box.cpp
 	<iostream>
 	"Box.h"
+	<SFML\Graphics.hpp>
+
+1591307161 source:d:\cppexcercises\game-2d\src\tekst.cpp
+	"Tekst.h"
+	<SFML\Graphics.hpp>
+
+1591306569 d:\cppexcercises\game-2d\include\tekst.h
+	<string>
 	<SFML\Graphics.hpp>
 
