@@ -85,6 +85,8 @@ void Animation::updateEnemy(int row,bool faceRight ,float deltatime){
 
     }
 }
+
+
 Animation::~Animation()
 {
     //dtor

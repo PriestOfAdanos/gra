@@ -2,6 +2,7 @@
 #define PLAYER_H
 #include "Animation.h"
 #include "Collider.h"
+#include "Rock.h"
 #include <SFML\Graphics.hpp>
 
 class Player
@@ -16,20 +17,23 @@ class Player
         void onCollisionWithCoin();
         sf::Vector2f GetPosition() {return body.getPosition();}
         virtual ~Player();
+    protected:
 
-
+     //   Rock rock;
     private:
         float speed;
         unsigned int row;
-        bool faceRight;
+
         sf::RectangleShape body;
         Animation animation;
     public:
+        bool faceRight;
         sf::Vector2f velocity;
         bool canJump;
         float jumpHeight;
         int score;
         int lives;
+        int amountOfRocks=0;
 };
 
 #endif // PLAYER_H

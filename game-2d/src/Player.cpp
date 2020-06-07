@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Player.h"
+#include "Rock.h"
 #include <SFML\Graphics.hpp>
 
 Player::Player(sf::Texture* texture, sf::Vector2u imageCount,  float switchTime, float speed, float jumpHeight,int score, int lives):
@@ -21,8 +22,7 @@ void Player::update(float deltatime){
         velocity.x -=speed;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         velocity.x +=speed;
-   // if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-        //velocity.y +=speed;
+
   //  if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         //velocity.y -=speed;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)&&canJump)
@@ -75,6 +75,7 @@ void Player::onCollision(sf::Vector2f direction, float deltatime)
     }
 }
 void Player::onCollisionWithCoin(){
+    canJump=false;
     score+=1;
 }
 void Player::onCollisionWithEnemy(){

@@ -1,0 +1,35 @@
+[33mcommit be3f0ffd31ec398b68ba2a876b600b48125c311b[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Michał Hutnik <jab.pio@wp.pl>
+Date:   Thu Jun 4 23:55:00 2020 +0200
+
+    text added, textures  fixed
+
+[33mcommit 5b6fe3cb890e48a6cc6bbcbff6218a1d89c7876a[m
+Author: Michał Hutnik <jab.pio@wp.pl>
+Date:   Mon Jun 1 11:10:53 2020 +0200
+
+    sounds of colleceting coins and moveable boxex have been added
+
+[33mcommit a454f4f3323f40327a1f7d44e4eeb904f561ff5a[m
+Author: Michał Hutnik <jab.pio@wp.pl>
+Date:   Fri May 29 13:05:14 2020 +0200
+
+    enemy added, test
+
+[33mcommit b5a31b7c3532b3d12bd2e161e882a68b22a4f4e4[m
+Author: Michał Hutnik <jab.pio@wp.pl>
+Date:   Mon May 18 18:47:27 2020 +0200
+
+    Optymalizacja platform, zbieranie przedmiotow
+
+[33mcommit 18eab61e2d949f639dfedb090d887365539fa94e[m
+Author: Michał Hutnik <jab.pio@wp.pl>
+Date:   Thu May 14 12:41:15 2020 +0200
+
+    initial
+
+[33mcommit 7c52bf859f37c3b7a1ed41115a5f4bd405deb584[m
+Author: Pawel <31793531+PriestOfAdanos@users.noreply.github.com>
+Date:   Thu May 14 12:37:27 2020 +0200
+
+    Initial commit

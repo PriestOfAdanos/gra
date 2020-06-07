@@ -33,6 +33,11 @@ int main()
     sf::Texture enemyTexture;
     sf::Texture boxTexture;
     sf::SoundBuffer BufferCoin;
+    sf::Texture rockTexture;
+    if (!rockTexture.loadFromFile("graphics/Rock.png"))
+    {
+        std::cout<<"error during font loading";
+    }
     sf::Font font;
     if (!font.loadFromFile("Fonts/Boxy-Bold.ttf"))
     {
@@ -51,10 +56,10 @@ int main()
     platformTexture.loadFromFile("graphics/Ground&Stone/Ground/Ground0.png");
     std::vector<Collecatable> Coins;
     Coins.push_back(Collecatable(&coinTexture, sf::Vector2u(1,4),0.3f,sf::Vector2f(30.0f,30.0f),sf::Vector2f(264.0f+0*70.0f,435.0f)));
-    Coins.push_back(Collecatable(&coinTexture, sf::Vector2u(1,4),0.3f,sf::Vector2f(30.0f,30.0f),sf::Vector2f(264.0f+1*70.0f,435.0f)));
-    Coins.push_back(Collecatable(&coinTexture, sf::Vector2u(1,4),0.3f,sf::Vector2f(30.0f,30.0f),sf::Vector2f(264.0f+2*70.0f,435.0f)));
+    Coins.push_back(Collecatable(&coinTexture, sf::Vector2u(1,4),0.3f,sf::Vector2f(30.0f,30.0f),sf::Vector2f(520.0f+1*70.0f,435.0f)));
+    Coins.push_back(Collecatable(&coinTexture, sf::Vector2u(1,4),0.3f,sf::Vector2f(30.0f,30.0f),sf::Vector2f(520.0f+2*70.0f,435.0f)));
 
-    Box box(&boxTexture, sf::Vector2f(60.0f,60.0f), sf::Vector2f(264.0f,400.0f));
+    Box box(&boxTexture, sf::Vector2f(60.0f,60.0f), sf::Vector2f(210.0f,400.0f));
     std::vector<Platform> platforms;
     platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(200.0f,500.0f)));
     platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(264.0f,500.0f)));
@@ -77,8 +82,14 @@ int main()
     platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+9*64.0f,775.0f)));
     platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+10*64.0f,775.0f)));
 
-    Enemy dragon(&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f);
+   // Enemy dragon(&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f, sf::Vector2f(1540.0f,720.0f));
+    std::vector<Enemy> dragons;
+    dragons.push_back(Enemy (&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f, sf::Vector2f(1540.0f,720.0f)));
+    dragons.push_back(Enemy (&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f, sf::Vector2f(700.0f,320.0f)));
     Player player(&playerTexture, sf::Vector2u(3,9),0.3f,300.0f,200.0f,0,1);
+    std::vector<Rock> rocks;
+    rocks.push_back(Rock(&coinTexture, sf::Vector2f(0.0f,0.0f),600.0f,0.3f,0));
+
     float deltatime = 0.0f;
     sf::Clock clock;
     while (window.isOpen())
@@ -92,25 +103,65 @@ int main()
                 window.close();
             if (event.type == sf::Event::Resized)
                 ResizeView(window,view);
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::M))//<--- dispatchTheRock()
+                {
+
+
+                    player.amountOfRocks++;
+                    std::cout<<player.amountOfRocks;
+                    //rocks.push_back(Rock(nullptr, sf::Vector2f(0.0f,0.0f),600.0f,0.3f));
+                    rocks.push_back(Rock(&rockTexture,player.GetPosition(), 600.0f, 0.3f,player.faceRight));
+                    rocks[player.amountOfRocks].dispatchTheRock(deltatime); //to-do
+
+                }
         }
 
         player.update(deltatime);
-        dragon.update(deltatime);
+         for(Enemy& dragon : dragons)
+        {
+            dragon.update(deltatime);
+        }
         box.update(deltatime);
         tekst.updateText(player.lives,player.score,player.GetPosition());
         Collider playerCollision = player.GetCollider();
         Collider boxColision = box.GetCollider();
+
         sf::Vector2f directionBox;
+        sf::Vector2f directionBoxForAmmunition;
         sf::Vector2f directionPlayer;
+
         if(box.GetCollider().checkCollioson(playerCollision,directionPlayer,0.5f))
                 player.onCollision(directionPlayer,deltatime);
 
         for(Platform& platform : platforms)
         {
+
+            for(Rock& rock : rocks)
+            {
+                sf::Vector2f directionRock;
+                Collider rockCollision = rock.GetCollider();
+                if(platform.GetCollider().checkCollioson(rockCollision,directionRock,1.0f))
+                {
+                    rock.onCollisionWithPlatforms();
+                } else {
+                    rock.dispatchTheRock(deltatime);
+                }
+            }
             if(platform.GetCollider().checkCollioson(playerCollision,directionPlayer,1.0f))
                 player.onCollision(directionPlayer,deltatime);
             if(platform.GetCollider().checkCollioson(boxColision,directionBox,1.0f))
                 box.onCollision(directionBox,deltatime);
+        }
+
+             for(Rock& rock : rocks)
+            {
+            rock.dispatchTheRock(deltatime);
+            if(rock.GetCollider().checkCollioson(boxColision,directionBoxForAmmunition,0))
+            {
+                rock.onCollisionWithPlatforms();
+            } else {
+                rock.dispatchTheRock(deltatime);
+            }
         }
         for(Collecatable& coin: Coins)
         {
@@ -133,13 +184,31 @@ int main()
         window.setView(view);
         player.draw(window);
         box.draw(window);
-        dragon.draw(window);
         tekst.draw(window);
-        if(dragon.GetCollider().checkCollioson(playerCollision,directionPlayer,1.0f))
+        for(Enemy& dragon : dragons)
         {
-            player.onCollisionWithEnemy();
+            for(Rock& rock : rocks)
+            {
+                sf::Vector2f directionRock;
+                Collider rockCollision = rock.GetCollider();
+                if(dragon.GetCollider().checkCollioson(rockCollision,directionRock,1.0f))
+                {
+                    player.score++;
+                    rock.onCollisionWithEnemy();
+                    dragon.killDragon();
+                } else {
+                    rock.dispatchTheRock(deltatime);
+                }
+            }
+           if(dragon.GetCollider().checkCollioson(playerCollision,directionPlayer,1.0f))
+           {
+               player.onCollisionWithEnemy();
+           }
         }
-
+        for(Enemy& dragon : dragons)
+        {
+            dragon.draw(window);
+        }
         for(Platform& platform : platforms)
         {
             platform.draw(window);
@@ -147,6 +216,10 @@ int main()
         for(Collecatable& coin : Coins)
         {
             coin.draw(window);
+        }
+        for(Rock& rock : rocks)
+        {
+            rock.draw(window);
         }
         if(player.lives<1)
         {

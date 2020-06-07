@@ -2,7 +2,7 @@
 #include <iostream>
 #include <SFML\Graphics.hpp>
 
-Enemy::Enemy(sf::Texture* texture, sf::Vector2u imageCount,  float switchTime, float speed):
+Enemy::Enemy(sf::Texture* texture, sf::Vector2u imageCount,  float switchTime, float speed, sf::Vector2f position):
     animation(texture, imageCount, switchTime)
 {
     this->speed = speed;
@@ -12,7 +12,7 @@ Enemy::Enemy(sf::Texture* texture, sf::Vector2u imageCount,  float switchTime, f
     faceRight=false;
     body.setSize(sf::Vector2f(66.0f,67.0f));
     body.setOrigin(body.getSize()/2.0f);
-    body.setPosition(1540.0f,720.0f);
+    body.setPosition(position);
     body.setTexture(texture);
 }
 void Enemy::update(float deltatime)
@@ -35,9 +35,12 @@ void Enemy::update(float deltatime)
             body.setTextureRect(animation.uvRect);
             body.move(-0.4f,0);
             totalDistance -=0.4f;
-            std::cout<<totalDistance<<'\n';
         }
     }
+}
+void Enemy::killDragon()
+{
+    body.setPosition(-100.0f,-100.0f);
 }
 void Enemy::draw(sf::RenderWindow& window){
     window.draw(body);
