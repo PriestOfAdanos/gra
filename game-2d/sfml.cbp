@@ -53,8 +53,10 @@
 		<Unit filename="include/Collecatable.h" />
 		<Unit filename="include/Collider.h" />
 		<Unit filename="include/Enemy.h" />
+		<Unit filename="include/Menu.h" />
 		<Unit filename="include/Platform.h" />
 		<Unit filename="include/Player.h" />
+		<Unit filename="include/Rock.h" />
 		<Unit filename="include/Tekst.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Animation.cpp" />
@@ -62,8 +64,10 @@
 		<Unit filename="src/Collecatable.cpp" />
 		<Unit filename="src/Collider.cpp" />
 		<Unit filename="src/Enemy.cpp" />
+		<Unit filename="src/Menu.cpp" />
 		<Unit filename="src/Platform.cpp" />
 		<Unit filename="src/Player.cpp" />
+		<Unit filename="src/Rock.cpp" />
 		<Unit filename="src/Tekst.cpp" />
 		<Extensions>
 			<code_completion />

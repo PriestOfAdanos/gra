@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1591488167 source:d:\cppexcercises\game-2d\src\player.cpp
+1591992513 source:d:\cppexcercises\game-2d\src\player.cpp
 	<iostream>
 	"Player.h"
 	"Rock.h"
@@ -427,10 +427,11 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1591535810 source:d:\cppexcercises\game-2d\main.cpp
+1591919719 source:d:\cppexcercises\game-2d\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<iostream>
+	<memory>
 	<vector>
 	"Player.h"
 	"Platform.h"
@@ -586,7 +587,7 @@
 	"Box.h"
 	<SFML\Graphics.hpp>
 
-1591307161 source:d:\cppexcercises\game-2d\src\tekst.cpp
+1591893043 source:d:\cppexcercises\game-2d\src\tekst.cpp
 	"Tekst.h"
 	<SFML\Graphics.hpp>
 
@@ -602,12 +603,13 @@
 	<SFML\Graphics.hpp>
 	"Tekst.h"
 
-1591531473 d:\cppexcercises\game-2d\include\rock.h
+1591902449 d:\cppexcercises\game-2d\include\rock.h
 	<SFML\Graphics.hpp>
 	"Animation.h"
 	"Collider.h"
 
-1591536030 source:d:\cppexcercises\game-2d\src\rock.cpp
+1591918572 source:d:\cppexcercises\game-2d\src\rock.cpp
 	"Rock.h"
+	<iostream>
 	"Animation.h"
 

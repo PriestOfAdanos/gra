@@ -72,6 +72,10 @@ void Player::onCollision(sf::Vector2f direction, float deltatime)
     } else {
         velocity.y += 981*deltatime;
         canJump=false;
+        if(velocity.y > 5000.0f)
+        {
+            onCollisionWithEnemy();
+        }
     }
 }
 void Player::onCollisionWithCoin(){

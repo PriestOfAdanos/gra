@@ -22,6 +22,7 @@ class Rock
         Animation animationRock;
 
     private:
+        float isFlying;
         bool faceRight;
 };
 

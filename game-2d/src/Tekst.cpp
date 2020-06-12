@@ -12,6 +12,7 @@ Tekst::Tekst(sf::Font* font, std::string content, int fontSize, sf::Color color,
   //  text.setOrigin(text.getSize()/2.0f);
 }
 void Tekst::updateText(int lives, int score,sf::Vector2f position) {
+
     std::string content = "Score " + std::to_string(score) +'\n' + "Lives: " + std::to_string(lives);
     text.setString(content);
     text.setPosition(position.x - 624.0f, position.y - 360.0f);

@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
+#include <memory>
 #include <vector>
 #include "Player.h"
 #include "Platform.h"
@@ -10,6 +11,8 @@
 #include "Enemy.h"
 #include "Box.h"
 #include "Tekst.h"
+
+int incrementDragon = 0;
 
 static const float VIEW_WIDTH = 1280.0f;
 static const float  VIEW_HEIGHT  = 720.0f;
@@ -45,7 +48,7 @@ int main()
     } else {
         std::cout<<"good";
     }
-    Tekst tekst(&font,"chuj",48,sf::Color::Black, sf::Vector2f(50.0f,50.0f));
+
     BufferCoin.loadFromFile("Audio/Coin.wav");
     sf::Sound CoinSound;
     CoinSound.setBuffer(BufferCoin);
@@ -54,38 +57,252 @@ int main()
     coinTexture.loadFromFile("graphics/coins.png");
     boxTexture.loadFromFile("graphics/box.png");
     platformTexture.loadFromFile("graphics/Ground&Stone/Ground/Ground0.png");
-    std::vector<Collecatable> Coins;
-    Coins.push_back(Collecatable(&coinTexture, sf::Vector2u(1,4),0.3f,sf::Vector2f(30.0f,30.0f),sf::Vector2f(264.0f+0*70.0f,435.0f)));
-    Coins.push_back(Collecatable(&coinTexture, sf::Vector2u(1,4),0.3f,sf::Vector2f(30.0f,30.0f),sf::Vector2f(520.0f+1*70.0f,435.0f)));
-    Coins.push_back(Collecatable(&coinTexture, sf::Vector2u(1,4),0.3f,sf::Vector2f(30.0f,30.0f),sf::Vector2f(520.0f+2*70.0f,435.0f)));
-
     Box box(&boxTexture, sf::Vector2f(60.0f,60.0f), sf::Vector2f(210.0f,400.0f));
-    std::vector<Platform> platforms;
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(200.0f,500.0f)));
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(264.0f,500.0f)));
+    std::vector<Platform*> platforms;
+    std::vector<Collecatable*> Coins;
 
 
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+1*64.0f,500.0f)));
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+2*64.0f,500.0f)));
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+3*64.0f,500.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(200.0f, 500.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(264.0f, 500.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(328.0f, 500.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(392.0f, 500.0f)));
 
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+8*64.0f,500.0f)));
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(520.0f+9*64.0f,500.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(520.0f + 1 * 64.0f, 390.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(520.0f + 2 * 64.0f, 390.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(520.0f + 3 * 64.0f, 390.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(520.0f + 4 * 64.0f, 390.0f)));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(900.0f + 1 * 64.0f, 700.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(900.0f + 2 * 64.0f, 700.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(900.0f + 3 * 64.0f, 700.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(900.0f + 4 * 64.0f, 700.0f)));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1000.0f, 280.0f + 1 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1000.0f, 280.0f + 2 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1000.0f, 280.0f + 3 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1000.0f, 280.0f + 4 * 64.0f)));
+
+		Coins.push_back(new Collecatable(&coinTexture, sf::Vector2u(1, 4), 0.3f, sf::Vector2f(30.0f, 30.0f), sf::Vector2f(1000.0f, 10.0f)));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1000.0f, 280.0f - 1 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1000.0f, 280.0f - 2 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1000.0f, 280.0f - 3 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1000.0f, 280.0f)));
+		///
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1300.0f + 1 * 64.0f, 700.0f - 1 * 64.0f )));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1300.0f + 2 * 64.0f, 700.0f - 2 * 64.0f )));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1300.0f + 3 * 64.0f, 700.0f - 3 * 64.0f )));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1300.0f + 4 * 64.0f, 700.0f - 4 * 64.0f )));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1200.0f + 1 * 64.0f, 280.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1200.0f + 2 * 64.0f, 280.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1200.0f + 3 * 64.0f, 280.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1200.0f + 4 * 64.0f, 280.0f)));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1600.0f + 1 * 64.0f, 280.0f+ 1 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1600.0f + 2 * 64.0f, 280.0f+ 1 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1600.0f + 3 * 64.0f, 280.0f+ 1 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1600.0f + 4 * 64.0f, 280.0f+ 1 * 64.0f)));
 
 
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+4*64.0f,280.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1000.0f + 1 * 64.0f, 280.0f - 1 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1000.0f + 2 * 64.0f, 280.0f - 1 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1000.0f + 3 * 64.0f, 280.0f - 1 * 64.0f)));
+		//platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1000.0f + 4 * 64.0f, 280.0f - 1 * 64.0f)));
 
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+5*64.0f,775.0f)));
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+6*64.0f,775.0f)));
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+7*64.0f,775.0f)));
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+8*64.0f,775.0f)));
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+9*64.0f,775.0f)));
-    platforms.push_back(Platform(&platformTexture, sf::Vector2f(64.0f,64.0f), sf::Vector2f(900.0f+10*64.0f,775.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1200.0f + 1 * 64.0f, 280.0f - 4 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1200.0f + 2 * 64.0f, 280.0f - 4 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1200.0f + 3 * 64.0f, 280.0f - 4 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1200.0f + 4 * 64.0f, 280.0f - 4 * 64.0f)));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1500.0f + 1 * 64.0f, 280.0f - 3 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1500.0f + 2 * 64.0f, 280.0f - 3 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1500.0f + 3 * 64.0f, 280.0f - 3 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1500.0f + 4 * 64.0f, 280.0f - 3 * 64.0f)));
+
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1900.0f + 3 * 64.0f, 80.0f  )));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 1 * 64.0f, 280.0f - 1 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 2 * 64.0f, 280.0f - 1 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 3 * 64.0f, 280.0f - 1 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 4 * 64.0f, 280.0f - 1 * 64.0f)));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 10 * 64.0f, 280.0f - 1 * 64.0f)));
+
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 15 * 64.0f, 280.0f - 1 * 64.0f)));
+
+		 //
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 21 * 64.0f, 280.0f)));
+
+
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f+21 * 64.0f, 280.0f + 1 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 21 * 64.0f, 280.0f + 2 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 21 * 64.0f, 280.0f + 3 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 21 * 64.0f, 280.0f + 4 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 21 * 64.0f, 280.0f + 5 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 21 * 64.0f, 280.0f + 6 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 21 * 64.0f, 280.0f + 7 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 21 * 64.0f, 280.0f + 8 * 64.0f)));
+
+
+		////
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 22 * 64.0f, 280.0f + 8 * 64.0f)));
+
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 23 * 64.0f, 280.0f + 12 * 64.0f)));
+
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 22 * 64.0f, 280.0f + 16 * 64.0f)));
+
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 24 * 64.0f, 280.0f + 20 * 64.0f)));
+
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 28 * 64.0f, 280.0f + 24 * 64.0f)));
+
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 32 * 64.0f, 280.0f + 23 * 64.0f)));
+
+
+		Coins.push_back(new Collecatable(&coinTexture, sf::Vector2u(1, 4), 0.3f, sf::Vector2f(30.0f, 30.0f), sf::Vector2f(2300.0f + 32 * 64.0f, 280.0f + 22 * 64.0f)));
+
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2260.0f + 38 * 64.0f, 280.0f + 24 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2260.0f + 38 * 64.0f, 280.0f + 25 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2260.0f + 38 * 64.0f, 280.0f + 26 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2260.0f + 38 * 64.0f, 280.0f + 27 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2260.0f + 38 * 64.0f, 280.0f + 28 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2260.0f + 38 * 64.0f, 280.0f + 29 * 64.0f)));
+
+
+
+		Coins.push_back(new Collecatable(&coinTexture, sf::Vector2u(1, 4), 0.3f, sf::Vector2f(30.0f, 30.0f), sf::Vector2f(2280.0f + 39 * 64.0f, 280.0f + 24 * 64.0f)));
+		Coins.push_back(new Collecatable(&coinTexture, sf::Vector2u(1, 4), 0.3f, sf::Vector2f(30.0f, 30.0f), sf::Vector2f(2280.0f + 39 * 64.0f, 280.0f + 25 * 64.0f)));
+		Coins.push_back(new Collecatable(&coinTexture, sf::Vector2u(1, 4), 0.3f, sf::Vector2f(30.0f, 30.0f), sf::Vector2f(2280.0f + 39 * 64.0f, 280.0f + 26 * 64.0f)));
+		Coins.push_back(new Collecatable(&coinTexture, sf::Vector2u(1, 4), 0.3f, sf::Vector2f(30.0f, 30.0f), sf::Vector2f(2280.0f + 39 * 64.0f, 280.0f + 27 * 64.0f)));
+		Coins.push_back(new Collecatable(&coinTexture, sf::Vector2u(1, 4), 0.3f, sf::Vector2f(30.0f, 30.0f), sf::Vector2f(2280.0f + 39 * 64.0f, 280.0f + 28 * 64.0f)));
+		Coins.push_back(new Collecatable(&coinTexture, sf::Vector2u(1, 4), 0.3f, sf::Vector2f(30.0f, 30.0f), sf::Vector2f(2280.0f + 39 * 64.0f, 280.0f + 29 * 64.0f)));
+
+
+
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 40 * 64.0f, 280.0f + 24 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 40 * 64.0f, 280.0f + 25 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 40 * 64.0f, 280.0f + 26 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 40 * 64.0f, 280.0f + 27 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 40 * 64.0f, 280.0f + 28 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 40 * 64.0f, 280.0f + 29 * 64.0f)));
+
+
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 38 * 64.0f, 280.0f+ 33 * 64.0f))); // tu dać ptwroa
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 39 * 64.0f, 280.0f+ 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 40 * 64.0f, 280.0f+ 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 41 * 64.0f, 280.0f+ 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 42 * 64.0f, 280.0f + 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 43 * 64.0f, 280.0f + 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 44 * 64.0f, 280.0f + 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 45 * 64.0f, 280.0f + 33 * 64.0f)));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 45 * 64.0f, 280.0f + 32 * 64.0f)));
+
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 46 * 64.0f, 280.0f + 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 47 * 64.0f, 280.0f + 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 48 * 64.0f, 280.0f + 33 * 64.0f)));
+
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 48 * 64.0f, 280.0f + 32 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 48 * 64.0f, 280.0f + 31 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 48 * 64.0f, 280.0f + 30 * 64.0f)));
+
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 49 * 64.0f, 280.0f + 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 47 * 64.0f, 280.0f + 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 46 * 64.0f, 280.0f + 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 45 * 64.0f, 280.0f + 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 44 * 64.0f, 280.0f + 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 43 * 64.0f, 280.0f + 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 42 * 64.0f, 280.0f + 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 41 * 64.0f, 280.0f + 33 * 64.0f)));
+
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 52 * 64.0f, 280.0f + 32 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 52 * 64.0f, 280.0f + 31 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 52 * 64.0f, 280.0f + 30 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 52 * 64.0f, 280.0f + 29 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 52 * 64.0f, 280.0f + 28 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 52 * 64.0f, 280.0f + 27 * 64.0f)));
+
+
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 57 * 64.0f, 280.0f + 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 58 * 64.0f, 280.0f + 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 59 * 64.0f, 280.0f + 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 50 * 64.0f, 280.0f + 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 51 * 64.0f, 280.0f + 33 * 64.0f)));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 51 * 64.0f, 280.0f + 32 * 64.0f)));
+
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 52 * 64.0f, 280.0f + 33 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 53 * 64.0f, 280.0f + 33 * 64.0f)));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 63 * 64.0f, 280.0f + 31 * 64.0f)));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 66 * 64.0f, 300.0f + 29 * 64.0f)));//
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 63 * 64.0f, 320.0f + 27 * 64.0f)));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 62 * 64.0f, 280.0f + 26 * 64.0f)));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 66 * 64.0f, 280.0f + 25 * 64.0f)));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 69 * 64.0f, 280.0f + 24 * 64.0f)));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 72 * 64.0f, 280.0f + 25 * 64.0f)));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 75 * 64.0f, 280.0f + 24 * 64.0f)));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 78 * 64.0f, 280.0f + 23 * 64.0f)));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 81 * 64.0f, 280.0f + 21 * 64.0f)));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 83 * 64.0f, 300.0f + 19 * 64.0f)));
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 80 * 64.0f, 280.0f + 18 * 64.0f)));
+
+
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 78 * 64.0f, 280.0f + 18 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 77 * 64.0f, 280.0f + 18 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 76 * 64.0f, 280.0f + 18 * 64.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 75 * 64.0f, 280.0f + 18 * 64.0f)));
+
+
+
+
+
+
+
+
+
+
+
+
 
    // Enemy dragon(&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f, sf::Vector2f(1540.0f,720.0f));
-    std::vector<Enemy> dragons;
-    dragons.push_back(Enemy (&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f, sf::Vector2f(1540.0f,720.0f)));
-    dragons.push_back(Enemy (&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f, sf::Vector2f(700.0f,320.0f)));
+   // std::unique_ptr<Enemy*> dragons;
+    std::vector<Enemy*> dragons;
+    dragons.push_back(new Enemy(&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f, sf::Vector2f(1540.0f,-10.0f)));
+    dragons.push_back(new Enemy(&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f, sf::Vector2f(1090.0f,650.0f)));
+   // dragons.push_back&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f, sf::Vector2f(1540.0f,720.0f);
+   // dragons.push_back(Enemy (&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f, sf::Vector2f(700.0f,320.0f)));
+    Tekst tekst(&font,"chuj",48,sf::Color::Black, sf::Vector2f(50.0f,50.0f));
     Player player(&playerTexture, sf::Vector2u(3,9),0.3f,300.0f,200.0f,0,1);
     std::vector<Rock> rocks;
     rocks.push_back(Rock(&coinTexture, sf::Vector2f(0.0f,0.0f),600.0f,0.3f,0));
@@ -103,23 +320,21 @@ int main()
                 window.close();
             if (event.type == sf::Event::Resized)
                 ResizeView(window,view);
-                if(sf::Keyboard::isKeyPressed(sf::Keyboard::M))//<--- dispatchTheRock()
-                {
-
-
-                    player.amountOfRocks++;
-                    std::cout<<player.amountOfRocks;
-                    //rocks.push_back(Rock(nullptr, sf::Vector2f(0.0f,0.0f),600.0f,0.3f));
-                    rocks.push_back(Rock(&rockTexture,player.GetPosition(), 600.0f, 0.3f,player.faceRight));
-                    rocks[player.amountOfRocks].dispatchTheRock(deltatime); //to-do
-
-                }
+            if(event.type == (sf::Event::KeyPressed)){
+              if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::M))
+              {
+                player.amountOfRocks++;
+                std::cout<<player.amountOfRocks<<'\n';
+                //rocks.push_back(Rock(nullptr, sf::Vector2f(0.0f,0.0f),600.0f,0.3f));
+                rocks.push_back(Rock(&rockTexture,player.GetPosition(), 600.0f, 0.3f,player.faceRight));
+                rocks[player.amountOfRocks].dispatchTheRock(deltatime); //to-do
+               }
+            }
         }
-
         player.update(deltatime);
-         for(Enemy& dragon : dragons)
+         for(Enemy* dragon : dragons)
         {
-            dragon.update(deltatime);
+            dragon->update(deltatime);
         }
         box.update(deltatime);
         tekst.updateText(player.lives,player.score,player.GetPosition());
@@ -133,23 +348,23 @@ int main()
         if(box.GetCollider().checkCollioson(playerCollision,directionPlayer,0.5f))
                 player.onCollision(directionPlayer,deltatime);
 
-        for(Platform& platform : platforms)
+        for(Platform* platform : platforms)
         {
 
             for(Rock& rock : rocks)
             {
                 sf::Vector2f directionRock;
                 Collider rockCollision = rock.GetCollider();
-                if(platform.GetCollider().checkCollioson(rockCollision,directionRock,1.0f))
+                if(platform->GetCollider().checkCollioson(rockCollision,directionRock,1.0f))
                 {
                     rock.onCollisionWithPlatforms();
                 } else {
                     rock.dispatchTheRock(deltatime);
                 }
             }
-            if(platform.GetCollider().checkCollioson(playerCollision,directionPlayer,1.0f))
+            if(platform->GetCollider().checkCollioson(playerCollision,directionPlayer,1.0f))
                 player.onCollision(directionPlayer,deltatime);
-            if(platform.GetCollider().checkCollioson(boxColision,directionBox,1.0f))
+            if(platform->GetCollider().checkCollioson(boxColision,directionBox,1.0f))
                 box.onCollision(directionBox,deltatime);
         }
 
@@ -163,14 +378,14 @@ int main()
                 rock.dispatchTheRock(deltatime);
             }
         }
-        for(Collecatable& coin: Coins)
+        for(Collecatable* coin: Coins)
         {
-            coin.update(deltatime);
-            if(coin.GetCollider().checkCollioson(playerCollision,directionPlayer,0))
+            coin->update(deltatime);
+            if(coin->GetCollider().checkCollioson(playerCollision,directionPlayer,0))
             {
                 CoinSound.play();
                 player.onCollisionWithCoin();
-                coin.removeElement();
+                coin->removeElement();
             }
         }
 
@@ -184,38 +399,39 @@ int main()
         window.setView(view);
         player.draw(window);
         box.draw(window);
-        tekst.draw(window);
-        for(Enemy& dragon : dragons)
+
+
+        for(Enemy* dragon : dragons)
         {
             for(Rock& rock : rocks)
             {
                 sf::Vector2f directionRock;
                 Collider rockCollision = rock.GetCollider();
-                if(dragon.GetCollider().checkCollioson(rockCollision,directionRock,1.0f))
+                if(dragon->GetCollider().checkCollioson(rockCollision,directionRock,1.0f))
                 {
-                    player.score++;
+                    dragon->killDragon();
                     rock.onCollisionWithEnemy();
-                    dragon.killDragon();
                 } else {
                     rock.dispatchTheRock(deltatime);
                 }
             }
-           if(dragon.GetCollider().checkCollioson(playerCollision,directionPlayer,1.0f))
+           if(dragon->GetCollider().checkCollioson(playerCollision,directionPlayer,1.0f))
            {
                player.onCollisionWithEnemy();
            }
         }
-        for(Enemy& dragon : dragons)
+        for(Enemy* dragon : dragons)
         {
-            dragon.draw(window);
+
+            dragon->draw(window);
         }
-        for(Platform& platform : platforms)
+        for(Platform* platform : platforms)
         {
-            platform.draw(window);
+            platform->draw(window);
         }
-        for(Collecatable& coin : Coins)
+        for(Collecatable* coin : Coins)
         {
-            coin.draw(window);
+            coin->draw(window);
         }
         for(Rock& rock : rocks)
         {
@@ -226,6 +442,7 @@ int main()
             Tekst gameOver(&font,"Game\nOver",96,sf::Color::Black, sf::Vector2f(50.0f,100.0f));
             gameOver.draw(window);
         }
+        tekst.draw(window);
         window.display();
     }
 
