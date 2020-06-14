@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
+#include <math.h>
+#include <string>
 #include <memory>
 #include <vector>
 #include "Player.h"
@@ -45,10 +47,7 @@ int main()
     if (!font.loadFromFile("Fonts/Boxy-Bold.ttf"))
     {
         std::cout<<"error during font loading";
-    } else {
-        std::cout<<"good";
     }
-
     BufferCoin.loadFromFile("Audio/Coin.wav");
     sf::Sound CoinSound;
     CoinSound.setBuffer(BufferCoin);
@@ -57,15 +56,17 @@ int main()
     coinTexture.loadFromFile("graphics/coins.png");
     boxTexture.loadFromFile("graphics/box.png");
     platformTexture.loadFromFile("graphics/Ground&Stone/Ground/Ground0.png");
-    Box box(&boxTexture, sf::Vector2f(60.0f,60.0f), sf::Vector2f(210.0f,400.0f));
+    float totalScore;
     std::vector<Platform*> platforms;
     std::vector<Collecatable*> Coins;
+    std::vector<Enemy*> dragons;
 
+        Box box(&boxTexture, sf::Vector2f(60.0f,60.0f), sf::Vector2f(210.0f,520.0f));
+        platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(136.0f, 550.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(200.0f, 550.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(264.0f, 550.0f)));
+		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(328.0f, 550.0f)));
 
-		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(200.0f, 500.0f)));
-		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(264.0f, 500.0f)));
-		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(328.0f, 500.0f)));
-		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(392.0f, 500.0f)));
 
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(520.0f + 1 * 64.0f, 390.0f)));
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(520.0f + 2 * 64.0f, 390.0f)));
@@ -82,6 +83,7 @@ int main()
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1000.0f, 280.0f + 3 * 64.0f)));
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1000.0f, 280.0f + 4 * 64.0f)));
 
+
 		Coins.push_back(new Collecatable(&coinTexture, sf::Vector2u(1, 4), 0.3f, sf::Vector2f(30.0f, 30.0f), sf::Vector2f(1000.0f, 10.0f)));
 
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1000.0f, 280.0f - 1 * 64.0f)));
@@ -90,14 +92,22 @@ int main()
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1000.0f, 280.0f)));
 		///
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1300.0f + 1 * 64.0f, 700.0f - 1 * 64.0f )));
+		Coins.push_back(new Collecatable(&coinTexture, sf::Vector2u(1, 4), 0.3f, sf::Vector2f(30.0f, 30.0f), sf::Vector2f(1300.0f + 1 * 64.0f, 700.0f - 2 * 64.0f)));
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1300.0f + 2 * 64.0f, 700.0f - 2 * 64.0f )));
+        Coins.push_back(new Collecatable(&coinTexture, sf::Vector2u(1, 4), 0.3f, sf::Vector2f(30.0f, 30.0f), sf::Vector2f(1300.0f + 2 * 64.0f, 700.0f - 3 * 64.0f)));
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1300.0f + 3 * 64.0f, 700.0f - 3 * 64.0f )));
+		Coins.push_back(new Collecatable(&coinTexture, sf::Vector2u(1, 4), 0.3f, sf::Vector2f(30.0f, 30.0f), sf::Vector2f(1300.0f + 3 * 64.0f, 700.0f - 4 * 64.0f)));
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1300.0f + 4 * 64.0f, 700.0f - 4 * 64.0f )));
+		Coins.push_back(new Collecatable(&coinTexture, sf::Vector2u(1, 4), 0.3f, sf::Vector2f(30.0f, 30.0f), sf::Vector2f(1300.0f + 4 * 64.0f, 700.0f - 5 * 64.0f)));
 
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1200.0f + 1 * 64.0f, 280.0f)));
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1200.0f + 2 * 64.0f, 280.0f)));
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1200.0f + 3 * 64.0f, 280.0f)));
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1200.0f + 4 * 64.0f, 280.0f)));
+
+
+        dragons.push_back(new Enemy(&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f, sf::Vector2f(1220.0f + 4 * 64.0f, 233.0f)));
+
 
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1600.0f + 1 * 64.0f, 280.0f+ 1 * 64.0f)));
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(1600.0f + 2 * 64.0f, 280.0f+ 1 * 64.0f)));
@@ -127,6 +137,7 @@ int main()
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 2 * 64.0f, 280.0f - 1 * 64.0f)));
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 3 * 64.0f, 280.0f - 1 * 64.0f)));
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 4 * 64.0f, 280.0f - 1 * 64.0f)));
+               dragons.push_back(new Enemy(&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f, sf::Vector2f(2300.0f + 4 * 64.0f, 280.0f - 2 * 55.0f)));
 
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 10 * 64.0f, 280.0f - 1 * 64.0f)));
 
@@ -237,7 +248,7 @@ int main()
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 52 * 64.0f, 280.0f + 30 * 64.0f)));
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 52 * 64.0f, 280.0f + 29 * 64.0f)));
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 52 * 64.0f, 280.0f + 28 * 64.0f)));
-		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 52 * 64.0f, 280.0f + 27 * 64.0f)));
+	//	platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 52 * 64.0f, 280.0f + 27 * 64.0f)));
 
 
 
@@ -263,13 +274,22 @@ int main()
 
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 66 * 64.0f, 280.0f + 25 * 64.0f)));
 
+        Coins.push_back(new Collecatable(&coinTexture, sf::Vector2u(1, 4), 0.3f, sf::Vector2f(30.0f, 30.0f), sf::Vector2f(2300.0f + 66 * 64.0f, 280.0f + 24 * 64.0f)));
+
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 69 * 64.0f, 280.0f + 24 * 64.0f)));
 
+        Coins.push_back(new Collecatable(&coinTexture, sf::Vector2u(1, 4), 0.3f, sf::Vector2f(30.0f, 30.0f), sf::Vector2f(2300.0f + 69 * 64.0f, 280.0f + 23 * 64.0f)));
+
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 72 * 64.0f, 280.0f + 25 * 64.0f)));
+
+		Coins.push_back(new Collecatable(&coinTexture, sf::Vector2u(1, 4), 0.3f, sf::Vector2f(30.0f, 30.0f), sf::Vector2f(2300.0f + 72 * 64.0f, 280.0f+ 24 * 64.0f)));
+
 
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 75 * 64.0f, 280.0f + 24 * 64.0f)));
 
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 78 * 64.0f, 280.0f + 23 * 64.0f)));
+
+		Coins.push_back(new Collecatable(&coinTexture, sf::Vector2u(1, 4), 0.3f, sf::Vector2f(30.0f, 30.0f), sf::Vector2f(2300.0f + 78 * 64.0f, 280.0f+ 22 * 64.0f)));
 
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 81 * 64.0f, 280.0f + 21 * 64.0f)));
 
@@ -284,28 +304,19 @@ int main()
 		platforms.push_back(new Platform(&platformTexture, sf::Vector2f(64.0f, 64.0f), sf::Vector2f(2300.0f + 75 * 64.0f, 280.0f + 18 * 64.0f)));
 
 
-
-
-
-
-
-
-
-
-
-
-
    // Enemy dragon(&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f, sf::Vector2f(1540.0f,720.0f));
    // std::unique_ptr<Enemy*> dragons;
-    std::vector<Enemy*> dragons;
-    dragons.push_back(new Enemy(&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f, sf::Vector2f(1540.0f,-10.0f)));
-    dragons.push_back(new Enemy(&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f, sf::Vector2f(1090.0f,650.0f)));
+
+    dragons.push_back(new Enemy(&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f, sf::Vector2f(1480.0f,-25.0f)));
+    dragons.push_back(new Enemy(&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f, sf::Vector2f(1150.0f,650.0f)));
    // dragons.push_back&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f, sf::Vector2f(1540.0f,720.0f);
    // dragons.push_back(Enemy (&enemyTexture, sf::Vector2u(3,2),0.3f,300.0f, sf::Vector2f(700.0f,320.0f)));
-    Tekst tekst(&font,"chuj",48,sf::Color::Black, sf::Vector2f(50.0f,50.0f));
-    Player player(&playerTexture, sf::Vector2u(3,9),0.3f,300.0f,200.0f,0,1);
+    Tekst tekst(&font,"",48,sf::Color::Black, sf::Vector2f(50.0f,50.0f));
+    Tekst gameOver(&font,"Game\nOver",96,sf::Color::Black, sf::Vector2f(50.0f,100.0f));
+    Tekst win(&font,"You\nWon!",36,sf::Color::Black, sf::Vector2f(7149.0f,1000.0f));
+    Player player(&playerTexture, sf::Vector2u(3,9),0.3f,300.0f,200.0f,0,3);
     std::vector<Rock> rocks;
-    rocks.push_back(Rock(&coinTexture, sf::Vector2f(0.0f,0.0f),600.0f,0.3f,0));
+    rocks.push_back(Rock(&coinTexture, sf::Vector2f(-200.0f,-300.0f),600.0f,0.3f,0));
 
     float deltatime = 0.0f;
     sf::Clock clock;
@@ -324,7 +335,6 @@ int main()
               if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::M))
               {
                 player.amountOfRocks++;
-                std::cout<<player.amountOfRocks<<'\n';
                 //rocks.push_back(Rock(nullptr, sf::Vector2f(0.0f,0.0f),600.0f,0.3f));
                 rocks.push_back(Rock(&rockTexture,player.GetPosition(), 600.0f, 0.3f,player.faceRight));
                 rocks[player.amountOfRocks].dispatchTheRock(deltatime); //to-do
@@ -411,6 +421,7 @@ int main()
                 {
                     dragon->killDragon();
                     rock.onCollisionWithEnemy();
+                    player.deadDragons++;
                 } else {
                     rock.dispatchTheRock(deltatime);
                 }
@@ -439,8 +450,18 @@ int main()
         }
         if(player.lives<1)
         {
-            Tekst gameOver(&font,"Game\nOver",96,sf::Color::Black, sf::Vector2f(50.0f,100.0f));
-            gameOver.draw(window);
+            std::cout<<"Game Over!";
+            break;
+        }
+       if(player.GetPosition().x > 7145.0f && player.GetPosition().y < 1350.0f)
+        {
+            totalScore = player.score;
+            totalScore += (10/player.amountOfRocks);
+            totalScore += (sqrt(player.deadDragons));
+            totalScore += player.lives*3;
+            std::string text = "You Won\nSlaughtered Dragons:"+std::to_string(player.deadDragons)+"\nCollected coins: "+ std::to_string(player.score) +"\nThrown rocks: "+ std::to_string(player.amountOfRocks)+"\ntotal score: "+std::to_string(totalScore);
+            win.text.setString(text);
+            win.draw(window);
         }
         tekst.draw(window);
         window.display();

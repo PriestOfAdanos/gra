@@ -8,7 +8,7 @@ Tekst::Tekst(sf::Font* font, std::string content, int fontSize, sf::Color color,
     text.setCharacterSize(fontSize);
     text.setString(content);
     text.setColor(color);
-    text.setPosition(50.0f,50.0f);
+    text.setPosition(pos);
   //  text.setOrigin(text.getSize()/2.0f);
 }
 void Tekst::updateText(int lives, int score,sf::Vector2f position) {

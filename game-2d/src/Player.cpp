@@ -12,7 +12,7 @@ Player::Player(sf::Texture* texture, sf::Vector2u imageCount,  float switchTime,
     faceRight=true;
     body.setSize(sf::Vector2f(66.0f,100.0f));
     body.setOrigin(body.getSize()/2.0f);
-    body.setPosition(206.0f,206.0f);
+        body.setPosition(206.0f,206.0f);
     body.setTexture(texture);
 }
 void Player::update(float deltatime){
@@ -72,7 +72,7 @@ void Player::onCollision(sf::Vector2f direction, float deltatime)
     } else {
         velocity.y += 981*deltatime;
         canJump=false;
-        if(velocity.y > 5000.0f)
+        if(velocity.y > 3000.0f)
         {
             onCollisionWithEnemy();
         }

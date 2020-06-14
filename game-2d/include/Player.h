@@ -33,6 +33,7 @@ class Player
         float jumpHeight;
         int score;
         int lives;
+        int deadDragons=0;
         int amountOfRocks=0;
 };
 

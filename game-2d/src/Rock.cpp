@@ -6,7 +6,6 @@
 Rock::Rock(sf::Texture* texture,sf::Vector2f position ,float speed, float switchTime, bool faceRight):
     animationRock(texture,sf::Vector2u(1,1),switchTime),faceRight(faceRight)
 {
-     std::cout<<position.x<<'\n';
     this->speedRock = speed;
     isFlying = 1;
     shape.setSize(sf::Vector2f(25.0f,25.0f));
@@ -21,7 +20,7 @@ void Rock::dispatchTheRock(float deltatime) {
     if(velocity.x < 0.05f)
     {
         velocity.x=0.01f;
-        shape.setPosition(-100.0f,-100.0f);
+        shape.setPosition(-200.0f,-600.0f);
     } else {
         velocity.x -= 0.01f;
     }
@@ -42,11 +41,11 @@ void Rock::draw(sf::RenderWindow& window) {
 }
 void Rock::onCollisionWithEnemy(){
     isFlying = 0;
-    shape.setPosition(-100.0f,-100.0f);
+    shape.setPosition(-200.0f,-600.0f);
 }
 void Rock::onCollisionWithPlatforms() {
     isFlying = 0;
-    shape.setPosition(-100.0f,-100.0f);
+    shape.setPosition(-200.0f,-600.0f);
 }
 Rock::~Rock()
 {

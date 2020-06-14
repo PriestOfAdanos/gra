@@ -40,7 +40,7 @@ void Enemy::update(float deltatime)
 }
 void Enemy::killDragon()
 {
-    body.setPosition(-100.0f,-100.0f);
+    body.setPosition(-200.0f,-700.0f);
 }
 void Enemy::draw(sf::RenderWindow& window){
     window.draw(body);

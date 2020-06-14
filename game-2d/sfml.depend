@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1591992513 source:d:\cppexcercises\game-2d\src\player.cpp
+1592170211 source:d:\cppexcercises\game-2d\src\player.cpp
 	<iostream>
 	"Player.h"
 	"Rock.h"
 	<SFML\Graphics.hpp>
 
-1591531150 d:\cppexcercises\game-2d\include\player.h
+1592170139 d:\cppexcercises\game-2d\include\player.h
 	"Animation.h"
 	"Collider.h"
 	"Rock.h"
@@ -427,10 +427,12 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1591919719 source:d:\cppexcercises\game-2d\main.cpp
+1592171795 source:d:\cppexcercises\game-2d\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<iostream>
+	<math.h>
+	<string>
 	<memory>
 	<vector>
 	"Player.h"
@@ -465,11 +467,11 @@
 	"Collider.h"
 	"Animation.h"
 
-1591535974 d:\cppexcercises\game-2d\include\enemy.h
+1592158070 d:\cppexcercises\game-2d\include\enemy.h
 	"Animation.h"
 	"Collider.h"
 
-1591535949 source:d:\cppexcercises\game-2d\src\enemy.cpp
+1592170323 source:d:\cppexcercises\game-2d\src\enemy.cpp
 	"Enemy.h"
 	<iostream>
 	<SFML\Graphics.hpp>
@@ -587,7 +589,7 @@
 	"Box.h"
 	<SFML\Graphics.hpp>
 
-1591893043 source:d:\cppexcercises\game-2d\src\tekst.cpp
+1592169460 source:d:\cppexcercises\game-2d\src\tekst.cpp
 	"Tekst.h"
 	<SFML\Graphics.hpp>
 
@@ -608,7 +610,7 @@
 	"Animation.h"
 	"Collider.h"
 
-1591918572 source:d:\cppexcercises\game-2d\src\rock.cpp
+1592169039 source:d:\cppexcercises\game-2d\src\rock.cpp
 	"Rock.h"
 	<iostream>
 	"Animation.h"
