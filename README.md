@@ -1,3 +1,37 @@
+# GRA 
+
+__Motywacje do stworzenia projektu__
+ 
+ Gra ta powstaje z powodu coraz to rosnącego zapotrzebowania na rozrywkę elektrocniczną. Starając się odpowiedzieć na popyt na tego typu media, zrobiliśmy co mogliśmy aby zapwnić możliwie jak najlepszą zabawę naszym odbiorcom
+ 
+ 
+ *__Kluczowe cechy__
+
+  * Zróżnicowany otwarty świat
+  * Ciekawi i wymagający przeciwnicy
+  * Wielorakość zadań
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Dokumentacja techniczna projektu
 __Pomysł:__
 Stworzyć grę platformową 2d z elementami walki, fizyki i zbierania “znajdźiek”.
