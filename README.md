@@ -9,6 +9,8 @@ __Potrzebny zespół:__
 Programiści c++
 
 __Kluczowe własności pomysłu:__
+
+
 Szeroka grupa potencjalnych odbiorców
 Wysoka wydajność
 Zróżnicowanie stylów rozgrywki
