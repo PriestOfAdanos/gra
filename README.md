@@ -50,7 +50,18 @@ __Funkcje__
   
   
   
+### Enemy
+Wszystkie elementy animacji:
 
+
+
+![GitHub Logo](gra/game-2d/graphics/dragon — kopia.png)
+
+
+__Funkcje__
+
+        * update, _synchronizuj wyświetlan9ie animacji z pozycja w logice gry_
+        * killDragon, _dezaktywuje wroga po odpowiedniej akcji wykonanej przez gracza_
 
 
 
