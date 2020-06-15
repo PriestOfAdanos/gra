@@ -1,29 +1,29 @@
 # Dokumentacja techniczna projektu
-Pomysł:
+__Pomysł:__
 Stworzyć grę platformową 2d z elementami walki, fizyki i zbierania “znajdźiek”.
 
-Rozwiązywany problem:
+__Rozwiązywany problem:__
 Lekka i przyjemna gra która będzie działać nawet na najsłabszym sprzęcie bez potrzeby poświęcania jakości.
 
-Potrzebny zespół:
+__Potrzebny zespół:__
 Programiści c++
 
-Kluczowe własności pomysłu:
+__Kluczowe własności pomysłu:__
 Szeroka grupa potencjalnych odbiorców
 Wysoka wydajność
 Zróżnicowanie stylów rozgrywki
 
-Nasza gra będzie dostępna za darmo, ponieważ chcemy dotrzeć do wszystkich możliwych odbiorców, na licencji MIT
+__Nasza gra będzie dostępna za darmo__, ponieważ chcemy dotrzeć do wszystkich możliwych odbiorców, na licencji MIT
 
-Dystrybucja odbędzie się za pośrednictwem wyspecjalizowanych platform (jak “Steam”)
+__Dystrybucja odbędzie się za pośrednictwem wyspecjalizowanych platform__ (jak “Steam”)
 
-Podstawowa funkcja aplikacji:
+__Podstawowa funkcja aplikacji:__
 Zapewnienie rozrywki odbiorcom poprzez możliwie jak najbardziej zróżnicowaną zawartość
 
-Przetwarzane dane:
+__Przetwarzane dane:__
 Aplikacja przyjmuje dane wprowadzane z klawiatury, użytkownik może sterować ruchami swojej postaci.
 
-Testowanie:
+__Testowanie:__
 Proces testowania w przypadku naszej produkcji miał dwa etapy. Pierwszy to testy poprawności implementacji funkcjonalności. 
 Kompilowanie
 Testy jednostkowe poszczególnych funkcji (inspekcja i porównywanie wyników wywołania z wynikami oczekiwanymi)
