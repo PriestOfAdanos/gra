@@ -60,8 +60,8 @@ Wszystkie elementy animacji:
 
 __Funkcje__
 
-        * update, _synchronizuj wyświetlan9ie animacji z pozycja w logice gry_
-        * killDragon, _dezaktywuje wroga po odpowiedniej akcji wykonanej przez gracza_
+   * update, _synchronizuj wyświetlan9ie animacji z pozycja w logice gry_
+   * killDragon, _dezaktywuje wroga po odpowiedniej akcji wykonanej przez gracza_
 
 
 
