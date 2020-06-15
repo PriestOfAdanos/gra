@@ -34,6 +34,9 @@ Instancję każdej z powy.ższych klas, poza klasą player możemy wywołać wie
 
 ### Player
 Wszystkie elementy animacji:
+
+
+
 ![GitHub Logo](./game-2d/graphics/wilber_from_gimp.png)
 
 __Funkcje__
