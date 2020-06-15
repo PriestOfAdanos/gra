@@ -1,5 +1,5 @@
 # GRA 
-
+## Opis ogólny
 __Motywacje do stworzenia projektu__
  
  Gra ta powstaje z powodu coraz to rosnącego zapotrzebowania na rozrywkę elektrocniczną. Starając się odpowiedzieć na popyt na tego typu media, zrobiliśmy co mogliśmy aby zapwnić możliwie jak najlepszą zabawę naszym odbiorcom
@@ -17,6 +17,21 @@ __Motywacje do stworzenia projektu__
   * 100mb pamięci wewnętrznej
   * 2gb pamięci RAM
   * Procesor
+  
+  ## Opis poszczególnych elemtów oprogramowania
+  
+  __Klasy wykorzystywane w projekcie__
+   * Player
+   * Platform
+   * Collecatable
+   * Animation
+   * Collider
+   * Enemy
+   * Box
+   * Tekst
+  
+  
+  
 
 
 
