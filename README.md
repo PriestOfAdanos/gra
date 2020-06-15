@@ -82,20 +82,26 @@ Tekstury:
 
 ##  Dokumentacja biznesowo-realizacyjna projektu
 __Pomysł:__
+
+
 Stworzyć grę platformową 2d z elementami walki, fizyki i zbierania “znajdźiek”.
 
 __Rozwiązywany problem:__
+
+
 Lekka i przyjemna gra która będzie działać nawet na najsłabszym sprzęcie bez potrzeby poświęcania jakości.
 
 __Potrzebny zespół:__
+
+
 Programiści c++
 
 __Kluczowe własności pomysłu:__
 
 
-Szeroka grupa potencjalnych odbiorców
-Wysoka wydajność
-Zróżnicowanie stylów rozgrywki
+   * Szeroka grupa potencjalnych odbiorców
+   * Wysoka wydajność
+   * Zróżnicowanie stylów rozgrywki
 
 __Nasza gra będzie dostępna za darmo__,ponieważ chcemy dotrzeć do wszystkich możliwych odbiorców, na licencji MIT
 
