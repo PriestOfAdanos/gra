@@ -21,14 +21,14 @@ __Motywacje do stworzenia projektu__
   ## Opis poszczególnych elemtów oprogramowania
   
   __Klasy wykorzystywane w projekcie__
-   * Player
-   * Platform
-   * Collecatable
-   * Animation
+   * Player _Klasa gracz. Pozwala na sprecyzowanie parametrów odpowiadających za sposób interakcji bohatera ze światem, takich jak wysokość skoku, zajmowany obszar i punky początkowy_
+   * Platform _Dzięki tej klasie możemy tworzyć wiele elemntów tworzących podstawę mapy stworzonego świata. W samej klasie możemy zmienić rozmiar czy domyślną teksturę platformy_
+   * Collecatable _Klasa określa wynik interakcji gracza z przedmiotem do zbierania_
+   * Animation _Klasa mówi w jaki sposób wyświetlać tekstóry, aby tworzyły płynnne animacje_ 
    * Collider
    * Enemy
-   * Box
-   * Tekst
+   * Box _Jest to kolejny przedmiot w którym możemy wchdozić w interakcję, poprzez jego przesównanie_
+   * Tekst _Możemy wyświtalć wiadomościdla gracza_ 
   
   
   
