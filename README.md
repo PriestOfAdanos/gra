@@ -33,7 +33,7 @@ __Motywacje do stworzenia projektu__
 Instancję każdej z powy.ższych klas, poza klasą player możemy wywołać wielokrotnie. Każdej z klas podajemy kordynaty początkowe w miejscu wywołania.
 
 ### Player
-Wszystkie elementy animacji:
+Tekstury:
 
 
 
@@ -42,8 +42,8 @@ Wszystkie elementy animacji:
 __Funkcje__
    * update, _Reagowanie na instrukcje gracza i zmiana pozycji_
    * onCollisionWithEnemy._ W razie kolizji z wrogiem, strać życie_
-   * draw
-   * onCollision 
+   * draw, _renderuj: domyślny element SFML_
+   * onCollision, _Wywołuję zdarzenie zetknięcia z obiektem, funkcje tę posiadają prawie wszystkie klasy_
    * onCollisionWithCoin, _W razie kolizji z Monetą do zbierania, dołóż do już zebranych_
 
 
@@ -51,7 +51,7 @@ __Funkcje__
   
   
 ### Enemy
-Wszystkie elementy animacji:
+Tekstury:
 
 
 
@@ -60,15 +60,15 @@ Wszystkie elementy animacji:
 
 __Funkcje__
 
-   * update, _synchronizuj wyświetlan9ie animacji z pozycja w logice gry_
+   * update, _synchronizuj wyświetlanie animacji z pozycją w logice gry_
    * killDragon, _dezaktywuje wroga po odpowiedniej akcji wykonanej przez gracza_
 
 
 
+### BOX
+Tekstury:
 
-
-
-
+![GitHub Logo](./game-2d/graphics/box.png)
 
 
 
