@@ -33,7 +33,7 @@ __Motywacje do stworzenia projektu__
 Instancję każdej z powy.ższych klas, poza klasą player możemy wywołać wielokrotnie. Każdej z klas podajemy kordynaty początkowe w miejscu wywołania.
 
 ### Klasa Player
-![GitHub Logo](/gra/game-2d/graphics/wilber_from_gimp.png)
+![GitHub Logo](./game-2d/graphics/wilber_from_gimp.png)
 Format: ![Alt Text](url)
   
   
