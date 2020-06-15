@@ -55,7 +55,7 @@ Wszystkie elementy animacji:
 
 
 
-![GitHub Logo](gra/game-2d/graphics/dragon — kopia.png)
+![GitHub Logo](./game-2d/graphics/dragon — kopia.png)
 
 
 __Funkcje__
