@@ -110,11 +110,11 @@ __Przetwarzane dane:__
 Aplikacja przyjmuje dane wprowadzane z klawiatury, użytkownik może sterować ruchami swojej postaci.
 
 __Testowanie:__
-    * Proces testowania w przypadku naszej produkcji miał dwa etapy. Pierwszy to testy poprawności implementacji funkcjonalności. 
-    * Kompilowanie
-    * Testy jednostkowe poszczególnych funkcji (inspekcja i porównywanie wyników wywołania z wynikami oczekiwanymi)
-    * Testy rozgrywki, projektu mapy.
-    * Każdy element został ułożony zgodnie z pierwotnym założeniem
-    * Zostało sprawdzone czy rozkład elementów pozwala na ukończenie gry
+   * Proces testowania w przypadku naszej produkcji miał dwa etapy. Pierwszy to testy poprawności implementacji funkcjonalności. 
+   * Kompilowanie
+   * Testy jednostkowe poszczególnych funkcji (inspekcja i porównywanie wyników wywołania z wynikami oczekiwanymi)
+   * Testy rozgrywki, projektu mapy.
+   * Każdy element został ułożony zgodnie z pierwotnym założeniem
+   * Zostało sprawdzone czy rozkład elementów pozwala na ukończenie gry
 Wprowadzono odpowiednie poprawki
 
