@@ -20,7 +20,7 @@ __Motywacje do stworzenia projektu__
   
   ## Opis poszczególnych elemtów oprogramowania
   
-  __Klasy wykorzystywane w projekcie__
+  ### Klasy wykorzystywane w projekcie
    * Player _Klasa gracz. Pozwala na sprecyzowanie parametrów odpowiadających za sposób interakcji bohatera ze światem, takich jak wysokość skoku, zajmowany obszar i punky początkowy_
    * Platform _Dzięki tej klasie możemy tworzyć wiele elemntów tworzących podstawę mapy stworzonego świata. W samej klasie możemy zmienić rozmiar czy domyślną teksturę platformy_
    * Collecatable _Klasa określa wynik interakcji gracza z przedmiotem do zbierania_
@@ -31,6 +31,10 @@ __Motywacje do stworzenia projektu__
    * Tekst _Możemy wyświtalć wiadomościdla gracza_ 
    
 Instancję każdej z powy.ższych klas, poza klasą player możemy wywołać wielokrotnie. Każdej z klas podajemy kordynaty początkowe w miejscu wywołania.
+
+### Klasa Player
+![GitHub Logo](gra/game-2d/graphics/wilber_from_gimp.png)
+Format: ![Alt Text](url)
   
   
   
