@@ -13,14 +13,18 @@ Szeroka grupa potencjalnych odbiorców
 Wysoka wydajność
 Zróżnicowanie stylów rozgrywki
 
-__Nasza gra będzie dostępna za darmo__, ponieważ chcemy dotrzeć do wszystkich możliwych odbiorców, na licencji MIT
+__Nasza gra będzie dostępna za darmo__,
+
+ponieważ chcemy dotrzeć do wszystkich możliwych odbiorców, na licencji MIT
 
 __Dystrybucja odbędzie się za pośrednictwem wyspecjalizowanych platform__ (jak “Steam”)
 
 __Podstawowa funkcja aplikacji:__
+
 Zapewnienie rozrywki odbiorcom poprzez możliwie jak najbardziej zróżnicowaną zawartość
 
 __Przetwarzane dane:__
+
 Aplikacja przyjmuje dane wprowadzane z klawiatury, użytkownik może sterować ruchami swojej postaci.
 
 __Testowanie:__
