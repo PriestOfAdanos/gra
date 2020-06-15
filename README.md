@@ -25,10 +25,12 @@ __Motywacje do stworzenia projektu__
    * Platform _Dzięki tej klasie możemy tworzyć wiele elemntów tworzących podstawę mapy stworzonego świata. W samej klasie możemy zmienić rozmiar czy domyślną teksturę platformy_
    * Collecatable _Klasa określa wynik interakcji gracza z przedmiotem do zbierania_
    * Animation _Klasa mówi w jaki sposób wyświetlać tekstóry, aby tworzyły płynnne animacje_ 
-   * Collider
-   * Enemy
+   * Collider _Dzięki tej klasie każdy obiekt zna swoje położenie wzgędem graca i może odpowiednio reagować_
+   * Enemy _Wtóg. Określa zakres jego ruchów czy zajmowanu obszar_
    * Box _Jest to kolejny przedmiot w którym możemy wchdozić w interakcję, poprzez jego przesównanie_
    * Tekst _Możemy wyświtalć wiadomościdla gracza_ 
+   
+Instancję każdej z powy.ższych klas, poza klasą player możemy wywołać wielokrotnie. Każdej z klas podajemy kordynaty początkowe w miejscu wywołania.
   
   
   
