@@ -32,9 +32,18 @@ __Motywacje do stworzenia projektu__
    
 Instancję każdej z powy.ższych klas, poza klasą player możemy wywołać wielokrotnie. Każdej z klas podajemy kordynaty początkowe w miejscu wywołania.
 
-### Klasa Player
+### Player
+Wszystkie elementy animacji:
 ![GitHub Logo](./game-2d/graphics/wilber_from_gimp.png)
-Format: ![Alt Text](url)
+
+__Funkcje__
+   * update, _Reagowanie na instrukcje gracza i zmiana pozycji_
+   * onCollisionWithEnemy._ W razie kolizji z wrogiem, strać życie_
+   * draw
+   * onCollision 
+   * onCollisionWithCoin, _W razie kolizji z Monetą do zbierania, dołóż do już zebranych_
+
+
   
   
   
