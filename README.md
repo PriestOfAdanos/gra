@@ -80,7 +80,7 @@ Tekstury:
 
 
 
-# Dokumentacja techniczna projektu
+##  Dokumentacja biznesowo-realizacyjna projektu
 __Pomysł:__
 Stworzyć grę platformową 2d z elementami walki, fizyki i zbierania “znajdźiek”.
 
