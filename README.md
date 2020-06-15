@@ -41,7 +41,7 @@ Tekstury:
 
 __Funkcje__
    * update, _Reagowanie na instrukcje gracza i zmiana pozycji_
-   * onCollisionWithEnemy._ W razie kolizji z wrogiem, strać życie_
+   * onCollisionWithEnemy. _W razie kolizji z wrogiem, strać życie_
    * draw, _renderuj, funkcja odpowiedzialna za wyświetlanie grafik_
    * onCollision, _Wywołuję zdarzenie zetknięcia z obiektem, funkcje tę posiadają prawie wszystkie klasy_
    * onCollisionWithCoin, _W razie kolizji z Monetą do zbierania, dołóż do już zebranych_
